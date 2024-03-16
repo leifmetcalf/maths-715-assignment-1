@@ -1,0 +1,49 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{xfrac}
+\usepackage{xcolor}
+
+\newcommand{\tr}{^{\mathsf{T}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\half}{\sfrac{1\!}2}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\closure}{cl}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\len}{length}
+
+\setlist[enumerate, 1]{leftmargin=0pt, label=\textbf{\arabic*.}}
+
+\begin{document}
+
+\begin{enumerate}
+
+\item Let \(G\) be a connected graph and let \(p=(p_1,\dots,p_k)\) and \(q=(q_1,\dots,p_k)\) be two longest paths of length \(k\) in \(G\). Suppose in order to find a contradiction the two paths are disjoint. Since \(G\) is connected there exists a path in \(G\setminus (p\cup q)\) connecting \(p_i\) and \(q_j\) for some \(1\leq i,j\leq k\). But then either \(p_1,\dots,p_i,\dots,q_j,\dots,q_k\) or \(q_1,\dots,q_j,\dots,p_i,\dots,p_k\) has length greater than \(k\); a contradiction. Hence the paths share a vertex.
+
+\item Let \(G\) be a graph with minimum valency at least 3. Let \(p=(p_1,\dots,p_k)\) be a path of maximum length in \(G\). Since \(p_1\) has valency at least 3 it has two neighbours \(u\) and \(v\) distinct from \(p_2\). These neighbours must lie in \(p\) since otherwise \((u\text{ (resp. \(v\))},p_1,\dots,p_k)\) would be a longer path than the already-maximum-length \(p\), so we may write them as \(p_i\) and \(p_j\) with \(i<j\). The lengths of the three cycles below have parities:
+\begin{align*}
+\len(p_i,p_1,\dots,p_i)&\equiv i\\
+\len(p_j,p_1,\dots,p_j)&\equiv j\\
+\len(p_1,p_i,\dots,p_j,p_1)&\equiv 1+i+j
+\end{align*}
+These cannot all be odd so \(G\) must contain an even cycle.
+
+\item Let \(G\) be a connected graph with the property that every path of length 3 can be extended to a 4-cycle. Note this means any path of length \(n\geq 3\) can be reduced to a path of length \(n-2\) by replacing the last 3 edges in the path by the edge that completes the 4-cycle. Therefore any two vertices that are connected by a path of odd length are adjacent.
+
+If \(G\) is bipartite, then any two vertices \(u,v\) in the left and right partitions respectively are connected by an odd path and hence adjacent, so \(G\) is complete bipartite.
+
+Conversely, suppose \(G\) is not bipartite, so it contains an odd cycle \(C\). Let \(u,v\in G\). Let \(p=(u,\dots,c_i)\)\ be the shortest path from \(u\) to the closest point in \(C\). Since \(C\) is an odd cycle there are two opposite-parity paths in \(C\) from \(c_i\) to any vertex in \(C\). These paths share no edges with \(p\) since the only point from \(C\) in \(p\) is \(c_i\). Hence we can fuse these paths with \(p\) to obtain an odd path from \(u\) to any vertex in \(C\) and so \(u\) is adjacent to every vertex in \(C\). Similarly, \(v\) is adjacent to every vertex in \(C\). Pick two adjacent vertices \(a,b\in C\); then the path \((u,a,b,v)\) has odd length and hence \(u,v\) are adjacent. Thus \(G\) is complete.
+
+\item 
+
+\end{enumerate}
+
+\end{document}
