@@ -6,6 +6,7 @@
 \usepackage{parskip}
 \usepackage{xfrac}
 \usepackage{xcolor}
+\usepackage{bm}
 
 \newcommand{\tr}{^{\mathsf{T}}}
 \newcommand{\N}{\mathbb{N}}
@@ -14,6 +15,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\half}{\sfrac{1\!}2}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\inner{\langle}{\rangle}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\closure}{cl}
@@ -26,7 +28,7 @@
 
 \begin{enumerate}
 
-\item Let \(G\) be a connected graph and let \(p=(p_1,\dots,p_k)\) and \(q=(q_1,\dots,p_k)\) be two longest paths of length \(k\) in \(G\). Suppose in order to find a contradiction the two paths are disjoint. Since \(G\) is connected there exists a path in \(G\setminus (p\cup q)\) connecting \(p_i\) and \(q_j\) for some \(1\leq i,j\leq k\). But then either \(p_1,\dots,p_i,\dots,q_j,\dots,q_k\) or \(q_1,\dots,q_j,\dots,p_i,\dots,p_k\) has length greater than \(k\); a contradiction. Hence the paths share a vertex.
+\item Let \(G\) be a connected graph and let \(p=(p_1,\dots,p_k)\) and \(q=(q_1,\dots,q_k)\) be two longest paths of length \(k\) in \(G\). Suppose the two paths are disjoint. Since \(G\) is connected there exists a path in \(G\) not using any edges in \(p\) or \(q\) connecting \(p_i\) and \(q_j\) for some \(1\leq i,j\leq k\). But then either \(p_1,\dots,p_i,\dots,q_j,\dots,q_k\) or \(q_1,\dots,q_j,\dots,p_i,\dots,p_k\) has length greater than \(k\); a contradiction. Hence the paths share a vertex.
 
 \item Let \(G\) be a graph with minimum valency at least 3. Let \(p=(p_1,\dots,p_k)\) be a path of maximum length in \(G\). Since \(p_1\) has valency at least 3 it has two neighbours \(u\) and \(v\) distinct from \(p_2\). These neighbours must lie in \(p\) since otherwise \((u\text{ (resp. \(v\))},p_1,\dots,p_k)\) would be a longer path than the already-maximum-length \(p\), so we may write them as \(p_i\) and \(p_j\) with \(i<j\). The lengths of the three cycles below have parities:
 \begin{align*}
@@ -36,13 +38,43 @@
 \end{align*}
 These cannot all be odd so \(G\) must contain an even cycle.
 
-\item Let \(G\) be a connected graph with the property that every path of length 3 can be extended to a 4-cycle. Note this means any path of length \(n\geq 3\) can be reduced to a path of length \(n-2\) by replacing the last 3 edges in the path by the edge that completes the 4-cycle. Therefore any two vertices that are connected by a path of odd length are adjacent.
+\item Let \(G\) be a connected graph with the property that every path of length 3 can be extended to a 4-cycle. This means any path of length \(n\geq 3\) can be reduced to a path of length \(n-2\) by replacing the last 3 edges in the path by the edge that completes the 4-cycle. Therefore any two vertices connected by a path of odd length are adjacent.
 
 If \(G\) is bipartite, then any two vertices \(u,v\) in the left and right partitions respectively are connected by an odd path and hence adjacent, so \(G\) is complete bipartite.
 
-Conversely, suppose \(G\) is not bipartite, so it contains an odd cycle \(C\). Let \(u,v\in G\). Let \(p=(u,\dots,c_i)\)\ be the shortest path from \(u\) to the closest point in \(C\). Since \(C\) is an odd cycle there are two opposite-parity paths in \(C\) from \(c_i\) to any vertex in \(C\). These paths share no edges with \(p\) since the only point from \(C\) in \(p\) is \(c_i\). Hence we can fuse these paths with \(p\) to obtain an odd path from \(u\) to any vertex in \(C\) and so \(u\) is adjacent to every vertex in \(C\). Similarly, \(v\) is adjacent to every vertex in \(C\). Pick two adjacent vertices \(a,b\in C\); then the path \((u,a,b,v)\) has odd length and hence \(u,v\) are adjacent. Thus \(G\) is complete.
+Conversely, suppose \(G\) is not bipartite, so it contains an odd cycle \(C\). Let \(u,v\in G\). Let \(p=(u,\dots,c_i)\)\ be the shortest path from \(u\) to the closest point \(c_i\) in \(C\). Since \(C\) is an odd cycle there are two opposite-parity paths in \(C\) from \(c_i\) to any vertex \(c_j\) in \(C\). These paths share no edges with \(p\) since the only point from \(C\) in \(p\) is \(c_i\). Hence we can fuse one of these paths with \(p\) to obtain an odd path from \(u\) to \(c_j\) and so \(u\) is adjacent to \(c_j\). Therefore \(u\) is adjacent to every vertex in \(C\) and similarly \(v\) is adjacent to every vertex in \(C\). Now pick two adjacent vertices \(a,b\in C\); the path \((u,a,b,v)\) has odd length and hence \(u,v\) are adjacent. Thus \(G\) is complete.
 
-\item 
+\item Let \(G\) be a graph with \(n\) vertices isomorphic to its line graph. Let \(d=(d_1,\dots,d_n)\) be the list of vertex degrees in \(G\). Since \(G\) is isomorphic to its line graph, the number of vertices, the number of edges, and the number of edge adjacencies are all equal to \(n\). By counting the number of edges in \(G\) we get
+\[\frac12\sum_{i=1}^n d_i=n\]
+from which we obtain
+\[\inner{d,\bm1}=2n\]
+where \(\bm1=(1,1,\dots)\).
+
+By counting the number of edge adjacencies in \(G\) we get
+\[\sum_{i=1}^n\binom{d_i}2=n\]
+and hence
+\begin{align*}
+&\frac12\inner{d,d-\bm1}=n\\
+\implies{}&\abs{d}^2-\inner{d,\bm1}=2n\\
+\implies{}&\abs{d}^2=4n
+\end{align*}
+so
+\begin{align*}
+\abs{d-\bm2}^2&=\abs{d}^2-2\inner{d,\bm2}+\abs{\bm2}^2\\
+&=4n-2(4n)+(2^2)n\\
+&=0.
+\end{align*}
+Therefore \(d=\bm2\). The only connected graph where every vertex has degree 2 is a cycle, so \(G\) is a cycle.
+
+\item \begin{enumerate}
+
+\item Let \(G\) be a graph of order \(n\) and at least \(\binom{n-1}2+2\) edges. Let \(u,v\) be distinct non-adjacent vertices. There are at most \(\binom{n-2}2\) edges between the vertices in \(G\setminus \{u,v\}\) so there must be at least \(\binom{n-1}2+2-\binom{n-2}2=n\) edges between \(\{u,v\}\) and \(G\setminus \{u,v\}\). Hence \(\deg u+\deg v\geq n\) and so by Ore's theorem \(G\) is Hamiltonian.
+
+\item The graph created by attaching a single vertex with a single edge to \(K_{n-1}\) has order \(n\) and \(\binom{n-1}2+1\) edges for \(n\geq2\). It cannot be Hamiltonian since the new vertex not from \(K_{n-1}\) has degree 1 and so cannot be part of a cycle.
+
+\end{enumerate}
+
+\item Let \(G\) be a graph such that every two odd cycles share a vertex. Let \(C\) be a cycle of minimal odd length. The subgraph induced by \(C\) is an odd cycle and hence 3-colourable since any chords would imply the existence of a shorter odd cycle. Every odd cycle in \(G\) shares a vertex with \(C\) so the subgraph \(G\setminus C\) has no odd cycles. Hence \(G\setminus C\) is 2-colourable and so \(G\) is 5-colourable.
 
 \end{enumerate}
 
